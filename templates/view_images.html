@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens Detectadas - {{ ip }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .image-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .image-list img {
+            margin: 10px;
+            max-width: 300px;
+            max-height: 200px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Imagens Detectadas - {{ ip }}</h1>
+        <div class="image-list">
+            {% for image in images %}
+                <a href="{{ image.url }}" target="_blank">
+                    <img src="{{ image.url }}" alt="Imagem detectada">
+                </a>
+            {% endfor %}
+        </div>
+        <a href="/" class="btn">Voltar para a página inicial</a>
+
+        <!-- Formulário para excluir a pasta -->
+        <form action="{{ url_for('delete_folder', name=ip) }}" method="post" style="margin-top: 20px;">
+            <button type="submit" class="btn btn-danger">Excluir Pasta</button>
+        </form>
+    </div>
+</body>
+</html>
